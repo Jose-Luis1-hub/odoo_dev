@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_managejoseluis_task,managejoseluis.task,model_managejoseluis_task,base.group_user,1,1,1,1
+access_managejoseluis_sprint,managejoseluis.sprint,model_managejoseluis_sprint,base.group_user,1,1,1,1
+access_managejoseluis_project,managejoseluis.project,model_managejoseluis_project,base.group_user,1,1,1,1
+access_managejoseluis_history,managejoseluis.history,model_managejoseluis_history,base.group_user,1,1,1,1
+access_managejoseluis_technology,managejoseluis.technology,model_managejoseluis_technology,base.group_user,1,1,1,1

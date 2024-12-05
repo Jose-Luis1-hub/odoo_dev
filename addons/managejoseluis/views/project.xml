@@ -1,0 +1,66 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="vista_managejoseluis_project_tree">
+      <field name="name">vista_managejoseluis_project_tree</field>
+      <field name="model">managejoseluis.project</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="history_id"/>
+          <field name="sprint_id"/>
+        </tree>
+      </field>
+    </record> 
+
+    <!-- Plantilla formulario tipo form      -->
+    
+    <record model="ir.ui.view" id="vista_managejoseluis_project_form">
+      <field name="name">vista_managejoseluis_project_form</field>
+      <field name="model">managejoseluis.project</field>
+      <field name="arch" type="xml">
+        <form string="formulario_project" >
+          <sheet>
+            <group name="group_top">
+              <field name="name"/>
+              <field name="description"/>
+              <field name="sprint_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>  
+
+    <record model="ir.actions.act_window" id="accion_managejoseluis_project_form">
+      <field name="name">Listado de project</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">managejoseluis.project</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          project
+        </p>
+        <p> Click <strong> 'Crear' </strong> para añadir nuevos elementos
+         </p>
+      </field>
+    </record>  
+
+
+
+    <!-- Plantilla action -->
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Manage de Jose Luis" id="menu_managejoseluis_raiz"/>
+    <!-- menu categories -->
+    <menuitem name="Management" id="menu_managejoseluis_listado" parent="menu_managejoseluis_raiz"/>
+
+    <!-- actions -->
+    <menuitem name="Proyecto" id="menu_managejoseluis_project" parent="menu_managejoseluis_listado"
+              action="accion_managejoseluis_project_form"/>
+  
+  </data>
+</odoo>

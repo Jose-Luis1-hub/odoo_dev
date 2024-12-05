@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="vista_filmotecajoseluis_genero_tree">
+      <field name="name">vista_filmotecajoseluis_genero_tree</field>
+      <field name="model">filmotecajoseluis.genero</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record> 
+
+    <!-- Plantilla formulario tipo form      -->
+    
+    <record model="ir.ui.view" id="vista_filmotecajoseluis_genero_form">
+      <field name="name">vista_filmotecajoseluis_genero_form</field>
+      <field name="model">filmotecajoseluis.genero</field>
+      <field name="arch" type="xml">
+        <form string="formulario_genero" >
+          <sheet>
+            <group name="group_top">
+              <field name="name"/>
+              <field name="description"/>
+              <field name="peliculas_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>  
+
+    <!-- Plantilla action -->
+
+    
+    <record model="ir.actions.act_window" id="accion_filmotecajoseluis_genero_form">
+      <field name="name">Listado de generos</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">filmotecajoseluis.genero</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Generos
+        </p>
+        <p> Click <strong> 'Crear' </strong> para añadir nuevos elementos
+         </p>
+      </field>
+    </record>  
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Filmoteca de Jose Luis" id="menu_filmotecajoseluis_raiz"/>
+    <!-- menu categories -->
+    <menuitem name="Listado de generos" id="menu_filmotecajoseluis_listado_genero" parent="menu_filmotecajoseluis_raiz"/>
+
+    <!-- actions -->
+    <menuitem name="Consultar" id="menu_filmotecajoseluis_genero" parent="menu_filmotecajoseluis_listado_genero"
+              action="accion_filmotecajoseluis_genero_form"/>
+  
+  </data>
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="vista_filmotecajoseluis_tecnica_tree">
+      <field name="name">vista_filmotecajoseluis_tecnica_tree</field>
+      <field name="model">filmotecajoseluis.tecnica</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="descripcion"/>
+          <field name="foto"/>
+        </tree>
+      </field>
+    </record> 
+
+    <!-- Plantilla formulario tipo form      -->
+    
+    <record model="ir.ui.view" id="vista_filmotecajoseluis_tecnica_form">
+      <field name="name">vista_filmotecajoseluis_tecnica_form</field>
+      <field name="model">filmotecajoseluis.tecnica</field>
+      <field name="arch" type="xml">
+        <form string="formulario_tecnica" >
+          <sheet>
+            <group name="group_top">
+              <field name="name"/>
+              <field name="descripcion"/>
+              <field name = "peliculas_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>  
+
+    <!-- Plantilla action -->
+
+    
+    <record model="ir.actions.act_window" id="accion_filmotecajoseluis_tecnica_form">
+      <field name="name">Listado de tecnicas de rodaje</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">filmotecajoseluis.tecnica</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Tecnicas
+        </p>
+        <p> Click <strong> 'Crear' </strong> para añadir nuevos elementos
+         </p>
+      </field>
+    </record>  
+
+    <!-- menu categories -->
+    <menuitem name="Listado de tecnicas de rodaje" id="menu_filmotecajoseluis_listado_tecnicas" parent="menu_filmotecajoseluis_raiz"/>
+
+    <!-- actions -->
+    <menuitem name="Consultar" id="menu_filmotecajoseluis_tecnicas" parent="menu_filmotecajoseluis_listado_tecnicas"
+              action="accion_filmotecajoseluis_tecnica_form"/>
+  
+  </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_filmotecajoseluis_pelicula,filmotecajoseluis.pelicula,model_filmotecajoseluis_pelicula,base.group_user,1,1,1,1
+access_filmotecajoseluis_genero,filmotecajoseluis.genero,model_filmotecajoseluis_genero,base.group_user,1,1,1,1
+access_filmotecajoseluis_tecnica,filmotecajoseluis.tecnica,model_filmotecajoseluis_tecnica,base.group_user,1,1,1,1
