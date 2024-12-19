@@ -30,6 +30,7 @@
         'views/project.xml',
         'views/technology.xml',
         'views/history.xml',
+        'views/developer.xml',
         'views/views.xml',
         'views/templates.xml',
     ],

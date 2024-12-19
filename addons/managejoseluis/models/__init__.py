@@ -6,3 +6,4 @@ from . import sprint
 from . import project
 from . import technology
 from . import history
+from . import developer
