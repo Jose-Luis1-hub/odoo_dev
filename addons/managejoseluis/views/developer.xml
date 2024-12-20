@@ -1,52 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
 
-    <record model="ir.ui.view" id="managejoseluis.devs_partner_form">
-      <field name="name">manage devs form</field>
+    <record model="ir.ui.view" id="vista_developer_tree">
+      <field name="name">vista_developer_tree</field>
       <field name="model">res.partner</field>
-      <field name="inherit_id" ref="base.view_partner_form"></field>
-      <field name="mode">primary</field>
       <field name="arch" type="xml">
-        <xpath expr="//sheet/notebook/page[@name='internal_notes']" position= "after">
-          <page name="devs" string="Devs">
-            <group>
-                <group>
-                  <field name="technologies"/>
-                </group>
-            </group>
-          </page>
-        </xpath>
+        <tree string="Lista de Desarrolladores">
+          <field name="name"/>
+          <field name="email"/>
+          <field name="phone"/>
+          <field name="technologies"/>
+        </tree>
       </field>
-    </record> 
-
-    <record model="ir.actions.act_window" id="managejoseluis.action_developer_window">
-      <field name="name">manage developer window</field>
-      <field name="res_model">res.partner</field>
-      <field name="view_mode">tree,form</field>
-    </record> 
-
-    <record model="ir.actions.act_window.view" id="managejoseluis.action_view_developer_tree">
-    <field name="sequence" eval="1"/>
-    <field name="view_mode">tree</field>
-    <field name="view_id" ref="base.view_partner_tree"/>
-    <field name="act_window_id" ref="managejoseluis.action_developer_window"></field>
     </record>
 
-    <record model="ir.actions.act_window.view" id="managejoseluis.action_view_developer_form">
-      <field name="sequence" eval="2"></field>
-      <field name="view_mode">form</field>
-      <field name="view_id" ref="managejoseluis.devs_partner_form"></field>
-      <field name="act_window_id" ref="managejoseluis.action_developer_window"></field>
-    </record> 
+
+    <record model="ir.ui.view" id="vista_developer_form">
+      <field name="name">vista_developer_form</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de Desarrollador">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="email"/>
+              <field name="phone"/>
+              <field name="technologies"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="action_developer_window" model="ir.actions.act_window">
+    <field name="name">Devs</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('is_dev', '=', True)]</field>
+    </record>
+
 
     <menuitem name="Manage de Jose Luis" id="menu_managejoseluis_raiz"/>
-    <!-- menu categories -->
+
     <menuitem name="Management" id="menu_managejoseluis_listado" parent="menu_managejoseluis_raiz"/>
 
-    <!-- actions -->
-    <menuitem name="Devs" id="managejoseluis.menu_1_devs_list" parent="menu_managejoseluis_listado"
-              action="managejoseluis.action_developer_window"/>
+
+    <menuitem name="Devs" id="menu_1_devs_list" parent="menu_managejoseluis_listado" action="managejoseluis.action_developer_window"/>
+
   
   </data>
 </odoo>

@@ -37,7 +37,7 @@ class task(models.Model):
                 if isinstance(sprint.end_date, datetime.datetime) and sprint.end_date > datetime.datetime.now():
                     task.carrera_id = sprint.id
                     found = True
-            if not found:
+            if not found:   
                 task.carrera_id = False
 
 
