@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
+import base64
 import datetime
+import json
 from odoo import models, fields, api
 
 
@@ -40,5 +42,38 @@ class task(models.Model):
             if not found:   
                 task.carrera_id = False
 
+    def exportar_JSON(self):
+        for task in self:
+            data = {
+                'name': task.name,
+                'description': task.description,
+                'start_date': task.start_date.strftime('%Y-%m-%d %H:%M:%S') if task.start_date else None, #usamos la funcion strftime para dar formato a las fechas y horas, ya que estas no pueden ser convertidas a JSON
+                'end_date': task.end_date.strftime('%Y-%m-%d %H:%M:%S') if task.end_date else None, #usamos la funcion strftime para dar formato a las fechas y horas, ya que estas no pueden ser convertidas a JSON
+                'is_paused': task.is_paused,
+                'carrera_id': task.carrera_id.id, #pasamos el id de los modelos anexos al de tareas ya que no se puede convertir a json un objeto entero
+                'tecnologias_id': task.tecnologias_id.id, #pasamos el id de los modelos anexos al de tareas ya que no se puede convertir a json un objeto entero
+                'history_id': task.history_id.name, #pasamos el id de los modelos anexos al de tareas ya que no se puede convertir a json un objeto entero
+                'project': task.project.name, #pasamos el id de los modelos anexos al de tareas ya que no se puede convertir a json un objeto entero 
+                'definition_date': task.definition_date.strftime('%Y-%m-%d %H:%M:%S') if task.definition_date else None #usamos la funcion strftime para dar formato a las fechas y horas, ya que estas no pueden ser convertidas a JSON
+            }
+        #convertimos el diccionario en un archivo JSON legible
+        datos_json = json.dumps(data, indent = 4)
+        #codificamos el json para convertirlo en archivo
+        archivo_json = base64.b64encode(datos_json.encode('utf-8'))
+        #creamos un archivo adjunto a odoo para que pueda ser descargado y lo configuramos
+        archivoAdjunto = self.env['ir.attachment'].create({
+            'name': f'{task.name}.json', #nombre del archivo a descargar
+            'type': 'binary',
+            'datas': archivo_json,
+            'res_model': 'managejoseluis.task', #modelo al que nos referimos
+            'res_id': task.id, #id al que nos referimos
+            'mimetype': 'application/json'
+        })
+        #por ultimo, devolvemos la opcion de descargar el archivo para el usuario
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/web/content/{archivoAdjunto.id}?download=true', #url de descarga
+            'target':'self'
+        }
 
     
